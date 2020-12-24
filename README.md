@@ -1,24 +1,70 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column           | Type   | Options          |
+| --------         | ------ | -----------      |
+| nickname         | string | null: false      |
+| email            | string | null: false      |
+| password         | string | null: false      |
+| family_name      | string | null: false      |
+| first_name       | string | null: false      |
+| family_name_kana | string | null: false      |
+| first_name_kana  | string | null: false      |
+| birth_year       |        | Active_Hashで実装 |
+| birth_month      |        | Active_Hashで実装 |
+| birth_day        |        | Active_Hashで実装 |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :buyers
 
-* Configuration
 
-* Database creation
+## items テーブル
 
-* Database initialization
+| Column           | Type   | Options             |
+| --------         | ------ | -----------         |
+| image            |        | Active_Storageで実装 |
+| title            | string | null: false         |
+| description      | text   | null: false         |
+| category         | text   | Active_Hashで実装    |
+| condition        |        | Active_Hashで実装    |
+| postage          |        | Active_Hashで実装    |
+| shipper_address  |        | Active_Hashで実装    |
+| preparation_days |        | Active_Hashで実装    |
+| price            |        | Active_Hashで実装    |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- has_one :buyer
 
-* Deployment instructions
+## buyers テーブル
 
-* ...
+| Column  | Type       | Options                        |
+| --------| ------     | -----------                    |
+| user_id | references | null: false, foreign_key: true |
+| item_id | references | null: false, foreign_key: true |
+
+
+### Association
+
+- belongs_to :item
+- has_one :destination
+
+## destination テーブル
+
+| Column       | Type    | Options          |
+| --------     | ------  | -----------      |
+| postal_code  | integer | null: false      |
+| prefecture   |         | Active_Hashで実装 |
+| city         | string  | null: false      |
+| house_number | string  | null: false      |
+| building     | string  |                  |
+| phone_number | integer | null: false      |
+
+
+### Association
+
+- belongs_to :buyer
