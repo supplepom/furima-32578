@@ -1,24 +1,70 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options          |
+| --------           | ------ | -----------      |
+| nickname           | string | null: false      |
+| email              | string | null: false      |
+| encrypted_password | string | null: false      |
+| family_name        | string | null: false      |
+| first_name         | string | null: false      |
+| family_name_kana   | string | null: false      |
+| first_name_kana    | string | null: false      |
+| date_of_birth      | date   | null: false      |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :buyers
 
-* Configuration
 
-* Database creation
+## items テーブル
 
-* Database initialization
+| Column              | Type       | Options                        |
+| --------            | ------     | -----------                    |
+| title               | string     | null: false                    |
+| description         | text       | null: false                    |
+| category_id         | integer    | null: false                    |
+| condition_id        | integer    | null: false                    |
+| postage_id          | integer    | null: false                    |
+| address_id          | integer    | null: false                    |
+| preparation_days_id | integer    | null: false                    |
+| price               | integer    | null: false                    |
+| user                | references | null: false, foreign_key: true |
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
 
-* Deployment instructions
+- belongs_to :user
+- has_one :buyer
 
-* ...
+## buyers テーブル
+
+| Column  | Type       | Options                        |
+| --------| ------     | -----------                    |
+| user    | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
+
+
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :destination
+
+## destination テーブル
+
+| Column                | Type       | Options                        |
+| --------              | ------     | -----------                    |
+| postal_code           | string     | null: false                    |
+| address_id            | integer    | null: false                    |
+| city                  | string     | null: false                    |
+| house_number          | string     | null: false                    |
+| building              | string     |                                |
+| phone_number          | string     | null: false                    |
+| buyer                 | references | null: false, foreign_key: true |
+
+
+### Association
+
+- belongs_to :buyer
