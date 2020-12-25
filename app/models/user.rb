@@ -4,17 +4,23 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :nickname, presence: true
-  validates :email, presence: true
-  validates :encrypted_password, presence: true
-  validates :date_of_birth, presence: true
-
   with_options presence: true do
-    validates :family_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々]/, message: 'is invalid. Input full-width characters.' }
-    validates :first_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々]/, message: 'is invalid. Input full-width characters.' }
+  validates :nickname
+  validates :date_of_birth
+  end
 
-    validates :family_name_kana,
-              format: { with: /\A[ァ-ヶー－]+\z/, message: 'is invalid. Input full-width katakana characters.' }
-    validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/, message: 'is invalid. Input full-width katakana characters.' }
+  with_options presence: true, format: { with: /\A[a-zA-Z0-9]+\z/, message: 'is invalid. Input half-width characters.' } do
+    validates :password
+  end
+
+
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々]/, message: 'is invalid. Input full-width characters.' } do
+    validates :family_name
+    validates :first_name
+  end
+
+  with_options presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: 'is invalid. Input full-width katakana characters.' } do
+    validates :family_name_kana              
+    validates :first_name_kana
   end
 end
