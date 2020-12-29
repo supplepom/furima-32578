@@ -16,13 +16,16 @@ class Item < ApplicationRecord
     validates :image
     validates :title
     validates :description
-    validates :category_id, numericality: { other_than: 1 } 
-    validates :condition_id, numericality: { other_than: 1 } 
-    validates :postage_id, numericality: { other_than: 1 } 
-    validates :address_id, numericality: { other_than: 1 } 
-    validates :preparation_day_id, numericality: { other_than: 1 } 
     validates :price
-    end
+  end
+
+  with_options presence: true, numericality: { other_than: 1 } do 
+    validates :category_id
+    validates :condition_id 
+    validates :postage_id 
+    validates :address_id 
+    validates :preparation_day_id
+  end
 
   with_options presence: true, format: { with: /[0-9]/, message: 'is invalid. Input half-width number.' } do
     validates :price
