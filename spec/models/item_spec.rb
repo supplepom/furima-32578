@@ -32,25 +32,50 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include "Category can't be blank"
       end  
+      it "category_idが1では投稿できない" do
+        @item.category_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Category must be other than 1"
+      end 
       it "condition_idが空では投稿できない" do
         @item.condition_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include "Condition can't be blank"
-      end       
+      end  
+      it "condition_idが1では投稿できない" do
+        @item.condition_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Condition must be other than 1"
+      end        
       it "postage_idが空では投稿できない" do
         @item.postage_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include "Postage can't be blank"
+      end 
+      it "postage_idが1では投稿できない" do
+        @item.postage_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Postage must be other than 1"
       end 
       it "address_idが空では投稿できない" do
         @item.address_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include "Address can't be blank"
       end 
+      it "address_idが1では投稿できない" do
+        @item.address_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Address must be other than 1"
+      end 
       it "preparation_day_idが空では投稿できない" do
         @item.preparation_day_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include "Preparation day can't be blank"
+      end 
+      it "preparation_day_idが1では投稿できない" do
+        @item.preparation_day_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Preparation day must be other than 1"
       end 
       it "priceが空では投稿できない" do
         @item.price = ''
