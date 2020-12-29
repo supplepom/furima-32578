@@ -29,7 +29,7 @@
 | condition_id        | integer    | null: false                    |
 | postage_id          | integer    | null: false                    |
 | address_id          | integer    | null: false                    |
-| preparation_days_id | integer    | null: false                    |
+| preparation_day_id  | integer    | null: false                    |
 | price               | integer    | null: false                    |
 | user                | references | null: false, foreign_key: true |
 
