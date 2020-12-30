@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_root_path, only: [:edit, :update, :destroy]
+  before_action :move_to_root_path, only: [:update, :destroy]
   before_action :authenticate_user!,except: [:index, :show]
 
   def index
