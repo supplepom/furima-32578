@@ -8,6 +8,8 @@ class PersonalInformation
     validates :house_number, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "is invalid. Input full-width characters." }
     validates :phone_number, numericality: { only_integer: true, message: "is invalid. Input half-width characters." } 
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   with_options presence: true, numericality: { other_than: 1 } do 
