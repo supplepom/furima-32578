@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!,except: [:index, :create]
+  before_action :authenticate_user!,except: [:create]
   before_action :move_to_root_path, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create]
 
@@ -45,7 +45,6 @@ class OrdersController < ApplicationController
 
    def move_to_root_path
     @information =  Item.find(params[:item_id])
-    
     if current_user.id == @information.user.id
     redirect_to root_path
     
