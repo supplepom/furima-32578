@@ -58,6 +58,16 @@ RSpec.describe PersonalInformation, type: :model do
       @personal_information.valid?
       expect(@personal_information.errors.full_messages).to include("Phone number is invalid. Input half-width characters.")
     end
+    it 'phone_numberは半角数字以外では保存できないこと' do
+      @personal_information.phone_number = 'ほげhoge'
+      @personal_information.valid?
+      expect(@personal_information.errors.full_messages).to include("Phone number is invalid. Input half-width characters.")
+    end
+    it 'phone_numberは12桁以上では保存できないこと' do
+      @personal_information.phone_number = '012345678901'
+      @personal_information.valid?
+      expect(@personal_information.errors.full_messages).to include("Phone number is invalid. Input less than 11 numbers.")
+    end
     it "tokenが空では登録できないこと" do
       @personal_information.token = nil
       @personal_information.valid?

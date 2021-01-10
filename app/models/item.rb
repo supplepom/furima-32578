@@ -34,5 +34,5 @@ class Item < ApplicationRecord
 
   validates :price,numericality: { greater_than_or_equal_to: 300, less_than: 9999999, message: 'Out of setting range' }
   
-  
+
 end
