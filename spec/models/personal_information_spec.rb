@@ -1,14 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe PersonalInformation, type: :model do
-  describe '購入情報の保存' do
-    before do
+      before do
       @personal_information = FactoryBot.build(:personal_information)
-    end
-
+      end
+  describe '購入情報の保存' do
+    context '保存できるとき' do
     it 'すべての値が正しく入力されていれば保存できること' do
       expect(@personal_information).to be_valid
     end
+    it 'buildingは空でも保存できること' do
+      @personal_information.building = nil
+      expect(@personal_information).to be_valid
+    end
+  end
+    context '保存できないとき' do
     it 'postal_codeが空だと保存できないこと' do
       @personal_information.postal_code = nil
       @personal_information.valid?
@@ -38,10 +44,6 @@ RSpec.describe PersonalInformation, type: :model do
       @personal_information.house_number = nil
       @personal_information.valid?
       expect(@personal_information.errors.full_messages).to include("House number can't be blank")
-    end
-    it 'buildingは空でも保存できること' do
-      @personal_information.building = nil
-      expect(@personal_information).to be_valid
     end
     it 'phone_numberが空だと保存できないこと' do
       @personal_information.phone_number = nil
@@ -78,5 +80,6 @@ RSpec.describe PersonalInformation, type: :model do
       @personal_information.valid?
       expect(@personal_information.errors.full_messages).to include("Item can't be blank")
     end
+  end
   end
 end
