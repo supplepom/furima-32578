@@ -10,6 +10,8 @@ class Item < ApplicationRecord
   belongs_to :address
   belongs_to :preparation_day
 
+  has_one :order 
+
   has_one_attached :image
 
   with_options presence: true do
@@ -32,5 +34,5 @@ class Item < ApplicationRecord
 
   validates :price,numericality: { greater_than_or_equal_to: 300, less_than: 9999999, message: 'Out of setting range' }
   
-  
+
 end
