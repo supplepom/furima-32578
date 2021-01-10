@@ -5,7 +5,7 @@ class PersonalInformation
   with_options presence: true do
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: "is invalid. Include hyphen(-)" }
     validates :city, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "is invalid. Input full-width characters." }
-    validates :house_number, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "is invalid. Input full-width characters." }
+    validates :house_number
     validates :phone_number, numericality: { only_integer: true, message: "is invalid. Input half-width characters." } 
     validates :token
     validates :user_id

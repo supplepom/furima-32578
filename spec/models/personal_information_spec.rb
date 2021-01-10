@@ -39,11 +39,6 @@ RSpec.describe PersonalInformation, type: :model do
       @personal_information.valid?
       expect(@personal_information.errors.full_messages).to include("House number can't be blank")
     end
-    it 'house_numberは全角文字以外では保存できないこと' do
-      @personal_information.house_number = 'hoge123'
-      @personal_information.valid?
-      expect(@personal_information.errors.full_messages).to include("House number is invalid. Input full-width characters.")
-    end
     it 'buildingは空でも保存できること' do
       @personal_information.building = nil
       expect(@personal_information).to be_valid
